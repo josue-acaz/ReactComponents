@@ -1,0 +1,8 @@
+.App {
+    max-width: 90%;
+    margin: auto;
+    margin-top: 5rem;
+}
+.App .xAutocomplete .icon {
+    font-size: 26px;
+}
