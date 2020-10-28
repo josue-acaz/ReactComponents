@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { Spinner } from '../../components';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import './styles.css';
 
@@ -57,7 +58,12 @@ export default function Autocomplete({
         }
     }, [open]);
 
+    useEffect(() => { console.log(_open) }, [_open])
+
     const onChange = (event) => {
+        if(!_open) {
+            setOpen(true);
+        }
         const text = event.target.value;
         setValue(text);
         onChangeText(text);
@@ -67,6 +73,15 @@ export default function Autocomplete({
         setValue(op.name);
         getOptionSelected(op);
         handleClose();
+        setOpen(false);
+    };
+
+    const handleClickEvent = () => {
+        if(_value) {
+            setValue("");
+        }
+        setOpen(true);
+        handleOpen();
     };
 
     return(
@@ -78,10 +93,7 @@ export default function Autocomplete({
                     style={iconPosition === "start" && !noIcon ? styles.paddingStart : styles.empty}
                     onChange={onChange} 
                     placeholder="Pesquise uma cidade..."
-                    onClick={() => {
-                        setOpen(true);
-                        handleOpen();
-                    }}
+                    onClick={handleClickEvent}
                 />
                 {iconPosition === "end" ? (
                     <>
@@ -96,14 +108,12 @@ export default function Autocomplete({
                         {!noIcon ? icon : <Fragment />}
                     </span>
                 )}
-                {loading && (
-                    <span style={styles.iconEnd} className="spanicon"><Spinner /></span>
-                )}
+                <span style={styles.iconEnd} className="spanicon">{loading ? <Spinner /> : <ArrowDropDownIcon className="icon" />}</span>
             </div>
             {_open && (
                 <span className="auto-container">
                     <div ref={wrapperRef} className="spanoption">
-                        {(value && !loading && options.length === 0) ? (
+                        {(_value && !loading && options.length === 0) ? (
                             <div className="noresults">{noResultsText}</div>
                         ) : (
                             <div className="options">
@@ -129,6 +139,6 @@ const styles = {
         right: '.5rem'
     },
     empty: {},
-    paddingStart: { paddingLeft: 30 },
+    paddingStart: { paddingLeft: 36 },
     noBorderBottom: { borderBottom: "none" }
 };
