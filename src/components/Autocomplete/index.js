@@ -129,6 +129,6 @@ const styles = {
         right: '.5rem'
     },
     empty: {},
-    paddingStart: { paddingLeft: 28 },
+    paddingStart: { paddingLeft: 30 },
     noBorderBottom: { borderBottom: "none" }
 };
