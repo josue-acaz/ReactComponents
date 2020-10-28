@@ -77,6 +77,7 @@ export default function Autocomplete({
                     value={_value} 
                     style={iconPosition === "start" && !noIcon ? styles.paddingStart : styles.empty}
                     onChange={onChange} 
+                    placeholder="Pesquise uma cidade..."
                     onClick={() => {
                         setOpen(true);
                         handleOpen();
@@ -100,18 +101,20 @@ export default function Autocomplete({
                 )}
             </div>
             {_open && (
-                <span ref={wrapperRef} className="spanoption">
-                    {(value && !loading && options.length === 0) ? (
-                        <div className="noresults">{noResultsText}</div>
-                    ) : (
-                        <div className="options">
-                            {options.map(op => (
-                                <div key={op.id} className="op" onClick={() => handleOptionSelected(op)}>
-                                    {renderOption(op)}
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                <span className="auto-container">
+                    <div ref={wrapperRef} className="spanoption">
+                        {(value && !loading && options.length === 0) ? (
+                            <div className="noresults">{noResultsText}</div>
+                        ) : (
+                            <div className="options">
+                                {options.map((op, index) => (
+                                    <div key={op.id} className="op" onClick={() => handleOptionSelected(op)}>
+                                        <div style={index===options.length-1 ? styles.noBorderBottom : styles.empty} className="item">{op.name}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </span>
             )}
         </div>
@@ -126,5 +129,6 @@ const styles = {
         right: '.5rem'
     },
     empty: {},
-    paddingStart: { paddingLeft: 28 }
+    paddingStart: { paddingLeft: 28 },
+    noBorderBottom: { borderBottom: "none" }
 };

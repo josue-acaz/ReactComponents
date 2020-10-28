@@ -18,7 +18,7 @@ input[type="text"], textarea, select {
   
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #f1f1f1; 
 }
 .autocomplete {
     position: relative;
@@ -27,37 +27,44 @@ input[type="text"], textarea, select {
     width: 100%;
     font-size: 16px;
     color: #444444;
-    padding: .5rem .5rem .5rem .5rem;
-    border-style: solid;
-    border-radius: 0rem;
-    border-width: .01rem;
-    border-color: #999999;
-    background-color: #ffffff;
+    padding: 1.2rem .5rem 1.2rem .5rem;
+    border: none;
+    border-radius: .6rem;
 }
-.autocomplete .spanoption {
+.autocomplete .auto-container {
+    padding: 1.2rem 1.2rem 1.8rem 1.4rem;
     background-color: #ffffff;
     position: absolute;
     width: 100%;
-    top: 3rem;
+    top: 3.6rem;
+    border-bottom-left-radius: .6rem;
+    border-bottom-right-radius: .6rem;
+}
+.autocomplete .spanoption {
+    background-color: #ffffff;
     max-height: 350px;
     overflow-y: scroll;
-    border-style: solid;
-    border-width: .1rem;
-    border-color: #e2e2e2;
-    border-top: none;
+    border: none;
+    border-left-width: .1rem;
+    border-left-color: #ebebeb;
+    border-left-style: solid;
+    padding-left: .8rem;
 }
-.autocomplete span .options .item {
-    padding: 1rem .5rem 1rem .5rem;
+.autocomplete .spanoption .options .item {
+    padding: 1.2rem .5rem 1.2rem .5rem;
     background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width: .1rem;
+    border-bottom-color: #f7f7f7;
 }
-.autocomplete span .options .item:hover {
+.autocomplete .spanoption .options .item:hover {
     background-color: #f4f4f4;
 }
-.autocomplete span .options .item {
+.autocomplete .spanoption .options .item {
     font-size: 18px;
     color: #444444;
 }
-.autocomplete span .options .op:hover {
+.autocomplete .spanoption .options .op:hover {
     cursor: pointer;
 }
 .autocomplete .input {
