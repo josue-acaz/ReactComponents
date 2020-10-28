@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 :root {
-  --color-backkground: #FFFFFF;
+  --color-background: #f1f1f1;
 }
 
 * {
@@ -27,7 +27,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  background: var(--color-backkground);
+  background: var(--color-background);
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;

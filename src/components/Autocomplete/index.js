@@ -36,7 +36,8 @@ export default function Autocomplete({
     onChangeText=(value= "") => value,
     handleOpen=()=>{},
     handleClose=()=>{},
-    noResultsText="Nenhum resultado encontrado!"
+    noResultsText="Nenhum resultado encontrado!",
+    renderOption=(op)=>(<div className="item">{op.name}</div>)
 }) {
 
     const[_open, setOpen] = useState(open);
@@ -74,15 +75,29 @@ export default function Autocomplete({
                 <input 
                     type="text" 
                     value={_value} 
+                    style={iconPosition === "start" && !noIcon ? styles.paddingStart : styles.empty}
                     onChange={onChange} 
                     onClick={() => {
                         setOpen(true);
                         handleOpen();
                     }}
                 />
-                <span style={iconPosition === "start" ? styles.iconStart : styles.iconEnd} className="spanicon">
-                    {loading ? <Spinner /> : !noIcon ? icon : <Fragment />}
-                </span>
+                {iconPosition === "end" ? (
+                    <>
+                        {!loading && (
+                            <span style={iconPosition === "start" ? styles.iconStart : styles.iconEnd} className="spanicon">
+                                {!noIcon ? icon : <Fragment />}
+                            </span>
+                        )}
+                    </>
+                ) : (
+                    <span style={iconPosition === "start" ? styles.iconStart : styles.iconEnd} className="spanicon">
+                        {!noIcon ? icon : <Fragment />}
+                    </span>
+                )}
+                {loading && (
+                    <span style={styles.iconEnd} className="spanicon"><Spinner /></span>
+                )}
             </div>
             {_open && (
                 <span ref={wrapperRef} className="spanoption">
@@ -90,7 +105,11 @@ export default function Autocomplete({
                         <div className="noresults">{noResultsText}</div>
                     ) : (
                         <div className="options">
-                            {options.map(op => <div key={op.id+""} className="item" onClick={() => handleOptionSelected(op)}>{op.name}</div>)}
+                            {options.map(op => (
+                                <div key={op.id} className="op" onClick={() => handleOptionSelected(op)}>
+                                    {renderOption(op)}
+                                </div>
+                            ))}
                         </div>
                     )}
                 </span>
@@ -105,5 +124,7 @@ const styles = {
     },
     iconEnd: {
         right: '.5rem'
-    }
+    },
+    empty: {},
+    paddingStart: { paddingLeft: 28 }
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Autocomplete } from './components';
 import { sleep } from './utils';
 
-import SearchIcon from '@material-ui/icons/Search';
+import AdjustIcon from '@material-ui/icons/Adjust';
 import api from './api';
 
 import './assets/css/globals.css';
@@ -45,8 +45,8 @@ function App() {
         className="xAutocomplete"
         open={open}
         loading={loading} 
-        icon={<SearchIcon className="icon" />} 
-        iconPosition="end"
+        icon={<AdjustIcon className="icon" />} 
+        iconPosition="start"
         getOptionSelected={handleOptionSelected}
         handleOpen={() => { setOpen(true) }}
         handleClose={() => { setOpen(false) }}
